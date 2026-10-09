@@ -1,0 +1,5 @@
+# __DOMAIN__ se reemplaza en setup.sh. Caddy obtiene y renueva el certificado HTTPS solo.
+__DOMAIN__ {
+	reverse_proxy 127.0.0.1:8080
+	header -Server
+}

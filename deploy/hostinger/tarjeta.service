@@ -1,0 +1,32 @@
+[Unit]
+Description=Tarjeta digital (Node.js, sin dependencias)
+After=network.target
+
+[Service]
+User=tarjeta
+Group=tarjeta
+WorkingDirectory=/opt/tarjeta
+ExecStart=/usr/bin/node /opt/tarjeta/server/server.mjs
+Environment=NODE_ENV=production PORT=8080 HOST=127.0.0.1 TRUST_PROXY=1 DIST_DIR=/opt/tarjeta/dist
+# Para activar Metricool añade: Environment=ENABLE_METRICOOL=1
+Restart=always
+RestartSec=3
+
+# Endurecimiento: el proceso casi no puede tocar nada fuera de /opt/tarjeta (solo lectura)
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_INET AF_INET6
+RestrictNamespaces=true
+LockPersonality=true
+CapabilityBoundingSet=
+SystemCallFilter=@system-service
+SystemCallArchitectures=native
+
+[Install]
+WantedBy=multi-user.target
