@@ -27,6 +27,7 @@ export const links = {
   blog: "https://ybestudio.site",
   telegram: "https://t.me/Dannyveneno",
   web: "https://ybestudio.tech",
+  studio: "https://ybestudio.com",
   whatsapp: "https://wa.me/5610731990?text=Hola%20me%20interesan%20tus%20servicios%20de%20desarrollo%20web",
   projects: "https://chamandigital.netlify.app/",
 };

@@ -8,6 +8,7 @@ import {
   FaHandshake,
   FaInstagram,
   FaLinkedin,
+  FaPalette,
   FaRss,
   FaSpotify,
   FaTelegram,
@@ -35,7 +36,7 @@ const socialIcons: Record<string, ReactNode> = {
 };
 
 const cta =
-  "flex items-center justify-center gap-2 rounded-xl px-5 py-[13px] text-[15px] font-semibold text-white no-underline transition duration-300 hover:-translate-y-0.5";
+  "flex aspect-square w-full min-w-0 flex-col items-center justify-center gap-1 rounded-xl p-1 text-[clamp(9px,2.5vw,11px)] font-semibold leading-tight text-white no-underline transition duration-300 hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime [&>svg]:shrink-0 [&>svg]:text-[clamp(16px,4vw,20px)]";
 const actionBtn =
   "grid h-[45px] w-[45px] place-items-center rounded-full bg-ink text-base text-lime shadow-[0_5px_15px_rgba(0,0,0,.3)] transition duration-300 hover:-translate-y-[3px]";
 
@@ -143,24 +144,30 @@ export default function App() {
               Información de Contacto
             </h2>
             <p className='mb-4 text-xs text-white/90'>{profile.email}</p>
-            <div className='flex flex-col gap-3.5'>
+            <div className='grid w-full grid-cols-4 gap-2'>
               <ExtLink
                 href={links.web}
                 className={`${cta} bg-gradient-to-br from-lime to-lime-dark shadow-[0_4px_15px_rgba(132,204,22,.3)]`}
               >
-                <FaGlobe aria-hidden /> Visitar Sitio Web
+                <FaGlobe aria-hidden /> <span>Visitar Sitio Web</span>
               </ExtLink>
               <ExtLink
                 href={links.whatsapp}
                 className={`${cta} bg-gradient-to-br from-gray-500 to-ink shadow-[0_4px_15px_rgba(107,114,128,.3)]`}
               >
-                <FaWhatsapp aria-hidden /> WhatsApp
+                <FaWhatsapp aria-hidden /> <span>WhatsApp</span>
               </ExtLink>
               <ExtLink
                 href={links.projects}
                 className={`${cta} bg-gradient-to-br from-lime to-lime-dark shadow-[0_4px_15px_rgba(132,204,22,.3)]`}
               >
-                <FaHandshake aria-hidden /> Líder de Proyectos
+                <FaHandshake aria-hidden /> <span>Líder de Proyectos</span>
+              </ExtLink>
+              <ExtLink
+                href={links.studio}
+                className={`${cta} bg-gradient-to-br from-gray-500 to-ink shadow-[0_4px_15px_rgba(107,114,128,.3)]`}
+              >
+                <FaPalette aria-hidden /> <span>YB Estudio</span>
               </ExtLink>
             </div>
           </Plasma>
