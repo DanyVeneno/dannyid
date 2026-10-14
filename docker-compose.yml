@@ -1,0 +1,23 @@
+# Para pegar en Hostinger Docker Manager > Componer manualmente.
+# Nginx existente gestiona el dominio y HTTPS.
+# Antes de desplegar: comprobar que el puerto local 18080 esté libre y
+# que dhannyvallejo.tech apunte a la IP pública confirmada del VPS.
+services:
+  tarjeta:
+    build:
+      context: https://github.com/DanyVeneno/dannyid.git#main
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      HOST: 0.0.0.0
+      PORT: "8080"
+      TRUST_PROXY: "1"
+    ports:
+      - "127.0.0.1:18080:8080"
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+
