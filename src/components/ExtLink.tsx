@@ -2,7 +2,7 @@ import type { AnchorHTMLAttributes } from "react";
 import { safeUrl } from "../data";
 
 /** Enlace externo seguro: solo https, sin window.opener y sin Referer. */
-export function extProps(href: string): AnchorHTMLAttributes<HTMLAnchorElement> {
+export function extProps(href: string): Pick<AnchorHTMLAttributes<HTMLAnchorElement>, "href" | "target" | "rel"> {
   return { href: safeUrl(href), target: "_blank", rel: "noopener noreferrer" };
 }
 
