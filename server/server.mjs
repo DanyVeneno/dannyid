@@ -1,6 +1,6 @@
 // Servidor estático sin dependencias (solo Node >= 20) para la tarjeta.
 // Variables: PORT=8080  HOST=0.0.0.0  DIST_DIR=../dist  TRUST_PROXY=1 (detrás de proxy)
-//            ENABLE_METRICOOL=1 (relaja la CSP para el rastreador)  RATE_LIMIT=300 (req/min/IP)
+//            RATE_LIMIT=300 (req/min/IP)
 import http from "node:http";
 import { createReadStream } from "node:fs";
 import { readFile, stat } from "node:fs/promises";
@@ -13,15 +13,13 @@ const ROOT = path.resolve(process.env.DIST_DIR ?? path.join(here, "..", "dist"))
 const PORT = Number(process.env.PORT ?? 8080);
 const HOST = process.env.HOST ?? "0.0.0.0";
 const TRUST_PROXY = process.env.TRUST_PROXY === "1";
-const METRICOOL = process.env.ENABLE_METRICOOL === "1";
 const RATE_LIMIT = Number(process.env.RATE_LIMIT ?? 300);
 
 // ---------- Cabeceras de seguridad (una sola fuente de verdad) ----------
-const tracker = METRICOOL ? " https://tracker.metricool.com" : "";
 const SECURITY = {
   "Content-Security-Policy": [
-    "default-src 'none'", `script-src 'self'${tracker}`, "style-src 'self'", "img-src 'self' data:",
-    "media-src 'self'", "font-src 'self'", `connect-src 'self'${tracker}`, "manifest-src 'self'",
+    "default-src 'none'", "script-src 'self'", "style-src 'self'", "img-src 'self' data:",
+    "media-src 'self'", "font-src 'self'", "connect-src 'self'", "manifest-src 'self'",
     "base-uri 'none'", "form-action 'none'", "frame-ancestors 'none'", "object-src 'none'",
   ].join("; "),
   "X-Content-Type-Options": "nosniff",

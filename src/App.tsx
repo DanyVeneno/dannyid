@@ -18,7 +18,6 @@ import {
 import { Plasma, PlasmaProvider } from "./lib/plasma-ui";
 import AudioAvatar from "./components/AudioAvatar";
 import ExtLink, { extProps } from "./components/ExtLink";
-import { useMetricool } from "./hooks/useMetricool";
 import { limeMood, links, profile, socials } from "./data";
 
 const touch =
@@ -41,8 +40,6 @@ const actionBtn =
   "grid h-[45px] w-[45px] place-items-center rounded-full bg-ink text-base text-lime shadow-[0_5px_15px_rgba(0,0,0,.3)] transition duration-300 hover:-translate-y-[3px]";
 
 export default function App() {
-  useMetricool(import.meta.env.VITE_METRICOOL_HASH);
-
   return (
     <PlasmaProvider
       mood={limeMood}

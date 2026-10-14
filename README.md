@@ -14,7 +14,7 @@ Desde la segunda vez (y en CI/Docker) usa `npm ci`: instala exactamente lo del l
 ```bash
 npm run build && npm start            # http://localhost:8080
 ```
-Variables: `PORT`, `HOST`, `DIST_DIR`, `RATE_LIMIT` (req/min por IP, 300), `TRUST_PROXY=1` si va detrás de nginx/Caddy/Cloudflare (toma el último valor de X-Forwarded-For), `ENABLE_METRICOOL=1` (ajusta la CSP solo).
+Variables: `PORT`, `HOST`, `DIST_DIR`, `RATE_LIMIT` (req/min por IP, 300), `TRUST_PROXY=1` si va detrás de nginx/Caddy/Cloudflare (toma el último valor de X-Forwarded-For).
 Healthcheck en `/healthz`. Detrás de un proxy con HTTPS, deja que él termine TLS.
 
 **Docker (Node, usuario sin privilegios, sin node_modules en la imagen final):**
@@ -51,7 +51,7 @@ Si el VPS ya usa los puertos 80/443 (otra web, panel, n8n…), `setup.sh` se det
 ## Qué lo hace más seguro
 - **Sin CDN ni scripts de terceros:** íconos (react-icons) y Plasma UI van dentro del bundle; antes dependía de Font Awesome en cdnjs.
 - **CSP estricta** (`script-src 'self'`, `style-src 'self'`, `default-src 'none'`), más `nosniff`, `Referrer-Policy`, `Permissions-Policy`, COOP/CORP y HSTS.
-- **Metricool es opt-in:** solo se carga si defines `VITE_METRICOOL_HASH` (ver `.env.example`); el hash se valida. Al activarlo hay que relajar la CSP como indica `deploy/security-headers.conf`.
+- **Sin rastreadores de analítica:** la tarjeta no carga scripts de seguimiento de terceros.
 - **Enlaces externos** siempre `https` (`safeUrl`) y con `rel="noopener noreferrer"`.
 - **Dependencias fijadas** a versión exacta + lockfile + `npm audit`. La librería Plasma UI está **vendorizada** en `src/lib/plasma-ui` (MIT, sin depender del registro npm).
 - **Servidor Node sin dependencias** (solo módulos nativos): bloquea path traversal y dotfiles, solo GET/HEAD, límite de peticiones por IP, timeouts anti-Slowloris, no registra query strings, Range/ETag/gzip/brotli, cierre limpio con SIGTERM.

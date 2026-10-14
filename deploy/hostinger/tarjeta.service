@@ -8,7 +8,6 @@ Group=tarjeta
 WorkingDirectory=/opt/tarjeta
 ExecStart=/usr/bin/node /opt/tarjeta/server/server.mjs
 Environment=NODE_ENV=production PORT=8080 HOST=127.0.0.1 TRUST_PROXY=1 DIST_DIR=/opt/tarjeta/dist
-# Para activar Metricool añade: Environment=ENABLE_METRICOOL=1
 Restart=always
 RestartSec=3
 
